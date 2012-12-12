@@ -19,7 +19,6 @@ class galua:
 				if len(mul) != len(temp):
 					print(mul, temp, sep='\n')
 				for j in range(1, len(temp)):
-					#print('temp ', temp, ' mul ', mul)
 					temp[-j] = (temp[-j] + mul[-j]) % 2
 		return galua(temp[temp.index(1):])
 		
