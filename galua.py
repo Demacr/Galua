@@ -4,7 +4,7 @@ class galua:
 		
 	def __add__(self, other):
 		temp = self.factors[:]
-		temp = [0] * (len(max(self.factors, other.factors)) + 1 - len(temp)) + temp
+		temp = [0] * (max(len(self.factors), len(other.factors)) + 1 - len(temp)) + temp
 		print(temp)
 		print(other.factors)
 		for i in range(1, len(temp)):
@@ -12,12 +12,10 @@ class galua:
 		return galua(temp[temp.index(1):])
 		
 	def __mul__(self, other):
-		temp = [0] * (len(max(self.factors, other.factors)) * 2)
+		temp = [0] * (max(len(self.factors), len(other.factors)) * 2)
 		for i in range(1, len(other.factors) + 1):
 			if other.factors[-i] == 1:
 				mul = [0] * (len(temp) - i + 1 - len(self.factors)) + self.factors + [0] * (i - 1)
-				if len(mul) != len(temp):
-					print(mul, temp, sep='\n')
 				for j in range(1, len(temp)):
 					temp[-j] = (temp[-j] + mul[-j]) % 2
 		return galua(temp[temp.index(1):])
@@ -53,4 +51,4 @@ def muls(pln, mod):
 	const = galua(pln)
 	for i in range(1, 256):
 		gal = galua(bs(i))
-		print('temp =', gal, (const * gal))
+		print('temp =', gal, (gal * const % module))
